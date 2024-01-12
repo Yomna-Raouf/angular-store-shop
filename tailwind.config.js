@@ -5,7 +5,18 @@ module.exports = {
     fontFamily: {
       inter: ["Inter", "ui-sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          50: "#E6ECFC",
+          700: "#002985",
+        },
+        gray: {
+          400: "#98A2B3",
+          900: "#101828",
+        },
+      },
+    },
   },
   plugins: [],
 };

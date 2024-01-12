@@ -1,0 +1,40 @@
+<!-- Header -->
+<header id="header">
+  <nav class="bg-primary-700 h-16 flex justify-start items-center py-5 px-12">
+    <a class="mr-4 cursor-pointer" routerLink="/">
+      <img src="../../assets/Logo.svg" width="102" height="28" alt="convertedIn store" />
+    </a>
+
+    <div class="flex flex-grow items-center justify-between">
+      <div class="w-[87%] h-8 relative" >
+        <img
+          src="../../assets/search.svg"
+          width="10"
+          height="10"
+          class="absolute top-1/2 -translate-y-1/2 ml-4"
+          alt="search"
+        />
+        <input
+          class="w-full h-full rounded py-2 pr-4 pl-8 text-xs font-normal text-gray-400"
+          type="search"
+          placeholder="search for product"
+        />
+      </div>
+
+      <ul class="flex flex-row grow justify-around mt-1">
+        <app-navbar-item icon="../../assets/bookmark.svg" label="Whishlist" ></app-navbar-item>
+        <app-navbar-item icon="../../assets/Cart.svg" label="Cart"></app-navbar-item>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="bg-primary-50 h-9 px-12 flex items-center">
+    <a
+      *ngFor="let category of mainCategories"
+      class="mr-6 text-sm font-semibold text-gray-900 cursor-pointer"
+      href="#"
+    >
+      {{ category }}
+    </a>
+  </div>
+</header>
