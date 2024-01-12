@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     CommonModule,
     RouterOutlet,
     NavbarComponent,
+    ProductCardComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
