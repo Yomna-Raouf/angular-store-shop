@@ -22,5 +22,6 @@ export interface ProductsListResponse {
 export interface ProductsPaginator {
   products: Product[];
   page: number;
+  searchToken?: string;
   hasMorePages: boolean;
 }

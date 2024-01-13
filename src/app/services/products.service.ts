@@ -16,18 +16,26 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(page: number = 1, itemsPerPage: number = 10): Observable<ProductsPaginator> {
-    return this.http.get<ProductsListResponse>(`${this.apiUrl}/products`,
+  getProducts(
+    { page = 1, itemsPerPage = 10, category, searchToken} :
+    {page: number, itemsPerPage?: number, category?: string, searchToken?: string}
+  ): Observable<ProductsPaginator> {
+
+    const url = `${this.apiUrl}/products${category ? `/category/${category}` : ''}${searchToken ? `/search?q=${searchToken}` : ''}`;
+
+    return this.http.get<ProductsListResponse>(url,
       {
         params: {
           limit: itemsPerPage,
-          skip: itemsPerPage * (page -1)
+          skip: itemsPerPage * (page -1),
+          Select: '',
         }
       }
     ).pipe(
       map(res => ({
         products: res.products,
         page,
+        searchToken,
         hasMorePages: res.skip + res.limit < res.total
       })),
       catchError(() => {
