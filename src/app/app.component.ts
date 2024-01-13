@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { ProductsModule } from './products/products.module';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,6 @@ import { ProductsModule } from './products/products.module';
   imports: [
     CommonModule,
     RouterOutlet,
-    ProductsModule,
     NavbarComponent,
   ],
   templateUrl: './app.component.html',

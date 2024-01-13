@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
 import { BehaviorSubject, Observable, scan, switchMap, tap } from 'rxjs';
 
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
@@ -13,7 +15,12 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule, ProductCardComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    InfiniteScrollModule,
+    ProductCardComponent
+  ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.css'
 })

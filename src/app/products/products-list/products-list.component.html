@@ -8,6 +8,7 @@
 >
   <a
     *ngFor="let product of paginator.products"
+    [routerLink]="['/', 'product', product.category, product.title, product.id]"
   >
     <app-product-card
       [productImage]="product.thumbnail"
