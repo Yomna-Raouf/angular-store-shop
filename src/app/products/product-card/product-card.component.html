@@ -2,7 +2,7 @@
 
   <div class="flex justify-center" >
     <img
-      src="https://api-rayashop.freetls.fastly.net/media/catalog/product/cache/4e49ac3a70c0b98a165f3fa6633ffee1/s/o/so298ec0tchn6nafamz-gcave_wm7la2m7te5qcb9c.jpg"
+      [src]="productImage"
       alt="Play station"
       loading="lazy"
       width="138px"
@@ -15,18 +15,21 @@
 
   <div class="py-3 px-4" >
     <div>
-      <p class="text-xs font-medium text-gray-700 text-ellipsis overflow-hidden line-clamp-2" >
-        Sony PlayStation 5 DigitalEdition Console With Controll…
+      <p class="text-xs font-medium text-gray-700 text-ellipsis overflow-hidden line-clamp-1">
+        {{ productName }}
+      </p>
+      <p class="text-xs font-medium text-gray-700 text-ellipsis overflow-hidden line-clamp-1" >
+        {{ productDescription }}
       </p>
     </div>
 
     <div class="flex items-center justify-between pt-3 " >
       <div>
         <span class="text-gray-400 font-medium text-[9px] mr-1">EGP</span>
-        <span class="text-sm text-gray-800 font-bold">{{ 24000 | number: '1.0-0' }}</span>
+        <span class="text-sm text-gray-800 font-bold">{{ productPrice | number: '1.0-0' }}</span>
       </div>
 
-      <app-rates-badge></app-rates-badge>
+      <app-rates-badge [productRating]="productRating" ></app-rates-badge>
     </div>
   </div>
 </div>

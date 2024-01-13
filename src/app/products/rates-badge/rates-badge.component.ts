@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-rates-badge',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './rates-badge.component.css'
 })
 export class RatesBadgeComponent {
-
+  @Input() productRating = 0;
 }
