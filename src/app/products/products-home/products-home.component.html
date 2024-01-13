@@ -6,7 +6,7 @@
 <main>
   <div class="py-16 px-12">
     <div class="flex justify-between">
-      <aside class="w-1/3">
+      <aside class="w-1/4 2xl:w-1/3">
         <app-category></app-category>
       </aside>
 
@@ -23,7 +23,7 @@
 
           <div
             *ngIf="paginator.products.length"
-            class="grid grid-cols-1 lg:grid-cols-5 gap-4"
+            class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
             infiniteScroll
             [infiniteScrollDistance]="2"
             [infiniteScrollThrottle]="100"
