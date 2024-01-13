@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Output, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { BehaviorSubject, debounceTime } from 'rxjs';
+
+import { CategoryService } from '../services/category.service';
 
 import { NavbarItemComponent } from '../navbar-item/navbar-item.component';
 
@@ -15,13 +17,15 @@ import { NavbarItemComponent } from '../navbar-item/navbar-item.component';
 })
 
 export class NavbarComponent implements OnDestroy {
-  mainCategories = ['Electronics', 'Mobile', 'Men', 'Women', 'Home', 'Beauty & Health', 'Baby & Toys', 'SuperMarket', 'Sell On Platform', 'New Deals'];
+  categories = inject(CategoryService);
   private _searchSubject: BehaviorSubject<string> = new BehaviorSubject('');
+
 
   @Output() setValue: EventEmitter<string> = new EventEmitter();
 
   constructor() {
     this._setSearchSubscription();
+    this.categories.getProductCategories();
   }
 
   private _setSearchSubscription() {

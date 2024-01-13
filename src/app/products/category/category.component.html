@@ -1,0 +1,12 @@
+<h2 class="text-gray-800 text-base font-semibold" >Category</h2>
+
+<div class="flex" >
+  <div class="w-[1px] bg-gray-200 mt-3"></div>
+  <div class="ml-10 mt-8 text-gray-700 text-base">
+    <h2 class="font-semibold mb-3" >All Electronics & Mobiles</h2>
+    <ul class="font-normal" >
+      <li *ngFor="let subCategory of electronicsCategorySubCategories"  class="mb-3" >{{ subCategory }}</li>
+    </ul>
+  </div>
+</div>
+

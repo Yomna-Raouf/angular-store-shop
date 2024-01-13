@@ -17,7 +17,7 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getProducts(
-    { page = 1, itemsPerPage = 10, category, searchToken} :
+    { page = 1, itemsPerPage = 15, category, searchToken} :
     {page: number, itemsPerPage?: number, category?: string, searchToken?: string}
   ): Observable<ProductsPaginator> {
 
@@ -34,11 +34,13 @@ export class ProductsService {
     ).pipe(
       map(res => ({
         products: res.products,
+        total: res.total,
         page,
         searchToken,
         hasMorePages: res.skip + res.limit < res.total
       })),
       catchError(() => {
+        window.alert('An Error Occured!')
         return throwError(() => 'Something went wrong. Please try again later.')
       })
     );

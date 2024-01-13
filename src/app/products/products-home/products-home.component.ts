@@ -12,6 +12,7 @@ import { ProductsPaginator } from '../../models/products.model';
 
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { CategoryComponent } from '../category/category.component';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
     InfiniteScrollModule,
     CommonModule,
     ProductCardComponent,
+    CategoryComponent,
     RouterLink
   ],
   templateUrl: './products-home.component.html',
@@ -32,29 +34,22 @@ export class ProductsHomeComponent {
 
   loading: BehaviorSubject<boolean> = new BehaviorSubject(true);
   page: BehaviorSubject<number> = new BehaviorSubject(1);
-  searchToken: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(public products: ProductsService) {
     this.paginator = this.getProducts();
   }
 
-  getProducts(): Observable<ProductsPaginator> {
+  getProducts(searchParam?: string): Observable<ProductsPaginator> {
     return this.page.pipe(
       tap(() => this.loading.next(true)),
-      switchMap((page) => this.products.getProducts({ page })),
-      scan(this.updatePaginator, { products: [], page: 0, hasMorePages: true }),
+      switchMap((page) => this.products.getProducts({ page, searchToken: searchParam })),
+      scan(this.updatePaginator, { products: [], total: 0, page: 0, hasMorePages: true, searchToken: searchParam }),
       tap(() => this.loading.next(false))
     )
   }
 
   searchList(token: string) {
-    this.searchToken.next(token);
-    this.paginator = this.searchToken.pipe(
-      tap(() => this.loading.next(true)),
-      switchMap((searchToken) => this.products.getProducts({ page: 1, searchToken })),
-      scan(this.updatePaginator, { products: [], page: 0, hasMorePages: true, searchToken: token }),
-      tap(() => this.loading.next(false))
-    )
+    this.paginator = this.getProducts(token);
   }
 
   updatePaginator(accumulator: ProductsPaginator, value: ProductsPaginator): ProductsPaginator {
