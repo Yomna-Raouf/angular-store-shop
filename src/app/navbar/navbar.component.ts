@@ -1,12 +1,16 @@
-import { Component, EventEmitter, Output, OnDestroy, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { BehaviorSubject, Observable, debounceTime } from 'rxjs';
+import { Store } from '@ngrx/store';
 
-import { CategoryService } from '../services/category.service';
+import { AppState } from '../store/store';
+import { categoriesSelector } from '../store/selectors';
+import { loadCategories } from '../store/actions';
 
 import { NavbarItemComponent } from '../navbar-item/navbar-item.component';
+
 
 @Component({
   selector: 'app-navbar',
@@ -16,20 +20,17 @@ import { NavbarItemComponent } from '../navbar-item/navbar-item.component';
   styleUrl: './navbar.component.css'
 })
 
-export class NavbarComponent implements OnDestroy, OnInit {
-  categories = inject(CategoryService);
+export class NavbarComponent implements OnDestroy {
   private _searchSubject: BehaviorSubject<string> = new BehaviorSubject('');
 
-  productsCategories$!: Observable<Array<string>>;
+  productsCategories$!: Observable<string[]>;
 
   @Output() setValue: EventEmitter<string> = new EventEmitter();
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
+    this.productsCategories$ = this.store.select(categoriesSelector);
+    this.store.dispatch(loadCategories());
     this._setSearchSubscription();
-  }
-
-  ngOnInit(): void {
-    this.productsCategories$ = this.categories.productCategories;
   }
 
   private _setSearchSubscription() {

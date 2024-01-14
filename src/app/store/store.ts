@@ -9,11 +9,11 @@ export interface AppState {
 }
 
 export interface AppStore {
-  todo: ActionReducer<CategoriesState, Action>;
+  categories: ActionReducer<CategoriesState, Action>;
 }
 
 export const appStore: AppStore = {
-  todo: categoriesReducer
+  categories: categoriesReducer
 }
 
 export const appEffects = [CategoriesEffects];

@@ -16,10 +16,7 @@ export class CategoriesEffects {
       ofType(loadCategories),
       mergeMap(() =>
         this.CategoryService.productCategories.pipe(
-          map((categories) => {
-            console.log({ categories })
-            return loadCategoriesSuccess({ categories })
-          }),
+          map((categories) => loadCategoriesSuccess({ categories })),
           catchError((error) =>
             of(loadCategoriesFailure({ error: error.message }))
           )
