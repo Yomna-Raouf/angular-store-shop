@@ -11,7 +11,7 @@
       </aside>
 
       <section class="w-full">
-        <div *ngIf="paginator | async as paginator">
+        <div *ngIf="paginator$ | async as paginator">
 
           <h2 *ngIf="!paginator.products.length" class="text-gray-800 text-base font-semibold"> Empty State </h2>
           <div *ngIf="paginator.products.length" class="mb-8 flex">
@@ -44,7 +44,7 @@
             </a>
           </div>
 
-          <p class="text-center my-3" *ngIf="loading | async">Loading...</p>
+          <p class="text-center my-3" *ngIf="loading$ | async">Loading...</p>
         </div>
       </section>
     </div>

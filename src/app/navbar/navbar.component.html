@@ -30,7 +30,7 @@
 
   <div class="bg-primary-50 h-9 px-12 flex items-center">
     <span
-      *ngFor="let category of categories.productsCategories.slice(0, 10)"
+      *ngFor="let category of (productsCategories$ | async )?.slice(0, 10)"
       class="mr-4 text-sm font-semibold text-gray-900 cursor-pointer"
     >
       {{ category }}

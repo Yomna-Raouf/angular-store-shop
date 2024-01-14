@@ -30,26 +30,26 @@ import { CategoryComponent } from '../category/category.component';
   styleUrl: './products-home.component.css'
 })
 export class ProductsHomeComponent {
-  paginator: Observable<ProductsPaginator>;
+  paginator$: Observable<ProductsPaginator>;
 
-  loading: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  page: BehaviorSubject<number> = new BehaviorSubject(1);
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  page$: BehaviorSubject<number> = new BehaviorSubject(1);
 
   constructor(public products: ProductsService) {
-    this.paginator = this.getProducts();
+    this.paginator$ = this.getProducts();
   }
 
   getProducts(searchParam?: string): Observable<ProductsPaginator> {
-    return this.page.pipe(
-      tap(() => this.loading.next(true)),
+    return this.page$.pipe(
+      tap(() => this.loading$.next(true)),
       switchMap((page) => this.products.getProducts({ page, searchToken: searchParam })),
       scan(this.updatePaginator, { products: [], total: 0, page: 0, hasMorePages: true, searchToken: searchParam }),
-      tap(() => this.loading.next(false))
+      tap(() => this.loading$.next(false))
     )
   }
 
   searchList(token: string) {
-    this.paginator = this.getProducts(token);
+    this.paginator$ = this.getProducts(token);
   }
 
   updatePaginator(accumulator: ProductsPaginator, value: ProductsPaginator): ProductsPaginator {
@@ -67,6 +67,6 @@ export class ProductsHomeComponent {
     if (!paginator.hasMorePages) {
       return;
     }
-    this.page.next(paginator.page + 1);
+    this.page$.next(paginator.page + 1);
   }
 }
