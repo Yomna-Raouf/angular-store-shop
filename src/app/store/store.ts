@@ -1,22 +1,19 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, ActionReducer } from "@ngrx/store";
 
+import { categoriesReducer } from './reducers';
 import { CategoriesState } from '../models/categories.model';
+import { CategoriesEffects } from './effects';
 
-import { loadCategories, loadCategoriesFailure, loadCategoriesSuccess } from './actions';
+export interface AppState {
+  categories: CategoriesState;
+}
 
+export interface AppStore {
+  todo: ActionReducer<CategoriesState, Action>;
+}
 
-export const initialState: CategoriesState = {
-  categories: [],
-  loading: false,
-  error: ''
-};
+export const appStore: AppStore = {
+  todo: categoriesReducer
+}
 
-export const categoriesReducer = createReducer(
-  initialState,
-
-  on(loadCategories, state => ({ ...state, loading: true })),
-
-  on(loadCategoriesSuccess, (state, { categories }) =>({ ...state, categories, loading: false })),
-
-  on(loadCategoriesFailure, (state, { error }) => ({ ...state, error, loading: false })),
-);
+export const appEffects = [CategoriesEffects];
