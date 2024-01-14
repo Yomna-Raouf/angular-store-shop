@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { catchError, map, throwError, shareReplay, Observable } from 'rxjs';
+import { catchError, map, throwError, shareReplay, Observable, timer, switchMap } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
 
 const CACHE_SIZE = 1;
+const REFRESH_INTERVAL = 900_000; // 15 mins
 @Injectable({
   providedIn: 'root'
 })
@@ -17,9 +18,11 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   get productCategories() {
-    console.log(this.cache$, 'cache')
     if (!this.cache$) {
-      this.cache$ = this.getProductCategories().pipe(
+      const timer$ = timer(0, REFRESH_INTERVAL);
+
+      this.cache$ = timer$.pipe(
+        switchMap(_ => this.getProductCategories()),
         shareReplay(CACHE_SIZE)
       );
     }
