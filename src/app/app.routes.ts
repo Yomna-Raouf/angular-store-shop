@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { productsRoutes } from './products/routes';
+
 export const routes: Routes = [
-  { path: '', loadChildren: async () => (await import('./products/products.module')).ProductsModule },
+  ...productsRoutes,
 ];
