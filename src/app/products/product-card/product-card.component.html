@@ -1,12 +1,15 @@
 <div class="w-48 h-72 bg-white rounded" >
 
   <div class="flex justify-center" >
+    <!-- TODO: Investigate difference between ngOptimizedIage directive and lazy loading with placeholder images -->
     <img
-      [src]="productImage"
+      *ngIf="productImage"
+      [ngSrc]="productImage"
       alt="Play station"
-      width="192px"
-      height="180px"
-      class="h-48"
+      width="138"
+      height="164"
+      class="h-[164px]"
+      priority
     />
   </div>
 

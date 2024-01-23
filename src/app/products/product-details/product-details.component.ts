@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,11 +10,10 @@ import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/products.model';
 
 import { NavbarComponent } from '../../navbar/navbar.component';
-
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [ NavbarComponent, CommonModule ],
+  imports: [ NavbarComponent, CommonModule, NgOptimizedImage ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -26,7 +25,7 @@ export class ProductDetailsComponent implements OnDestroy {
   productId!: number;
   product!: Product;
 
-  selectedPreviewImage!: string;
+  selectedPreviewImage: string = "https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-1,h-1:w-452,h-460";
 
   constructor() {
     this.productId = this._activatedRoute.snapshot.params['id'];

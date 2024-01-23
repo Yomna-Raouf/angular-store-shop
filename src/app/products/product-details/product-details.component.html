@@ -8,19 +8,21 @@
         <div class="h-[460px] flex flex-col justify-between overflow-scroll" >
           <img
             *ngFor="let image of product?.images"
-            [src]="image"
+            [ngSrc]="image"
             [alt]="product?.title"
-            width="104px"
-            height="141px"
+            width="104"
+            height="141"
+            priority
             (click)="updatePreviewedImage(image)"
           />
         </div>
         <div class="ml-4" >
           <img
-            [src]="selectedPreviewImage"
+            [ngSrc]="selectedPreviewImage"
             [alt]="product?.title"
             width="452"
             height="460"
+            priority
             class="h-[460px]"
           />
         </div>
