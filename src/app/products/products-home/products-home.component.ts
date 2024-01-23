@@ -35,7 +35,7 @@ export class ProductsHomeComponent {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   page$: BehaviorSubject<number> = new BehaviorSubject(1);
 
-  constructor(public products: ProductsService) {
+  constructor(private products: ProductsService) {
     this.paginator$ = this.getProducts();
   }
 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, catchError, map, throwError } from 'rxjs';
 
-import { ProductsListResponse, ProductsPaginator } from '../models/products.model';
+import { Product, ProductsListResponse, ProductsPaginator } from '../models/products.model';
 import { environment } from '../../environments/environment';
 
 
@@ -44,5 +44,9 @@ export class ProductsService {
         return throwError(() => 'Something went wrong. Please try again later.')
       })
     );
+  }
+
+  getProductById(productId: number) {
+    return this.http.get<Product>(`${this.apiUrl}/products/${productId}`);
   }
 }

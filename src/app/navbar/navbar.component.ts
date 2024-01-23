@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, debounceTime } from 'rxjs';
 
 import { CategoryService } from '../services/category.service';
 
-import { NavbarItemComponent } from '../navbar-item/navbar-item.component';
+import { NavbarItemComponent } from './navbar-item/navbar-item.component';
 
 @Component({
   selector: 'app-navbar',
