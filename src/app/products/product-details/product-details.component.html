@@ -1,7 +1,32 @@
 <app-navbar></app-navbar>
 
 <main>
-  <div class="py-6 px-12">
-    <p>product-details works!</p>
+  <div class="py-16 px-12">
+    <div>
+      <div class="flex">
+        <!-- Can be a carousel to handle images more than the container cap -->
+        <div class="h-[460px] flex flex-col justify-between overflow-scroll" >
+          <img
+            *ngFor="let image of product?.images"
+            [src]="image"
+            [alt]="product?.title"
+            width="104px"
+            height="141px"
+            (click)="updatePreviewedImage(image)"
+          />
+        </div>
+        <div class="ml-4" >
+          <img
+            [src]="selectedPreviewImage"
+            [alt]="product?.title"
+            width="452"
+            height="460"
+            class="h-[460px]"
+          />
+        </div>
+      </div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </main>
