@@ -1,15 +1,16 @@
 <app-navbar></app-navbar>
 
 <main>
-  <div class="py-16 px-12">
-    <div>
-      <div class="flex">
-        <!-- Can be a carousel to handle images more than the container cap -->
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="!loading" class="py-16 px-12">
+    <div class="flex" >
+      <div class="flex mr-8">
+        <!-- Can be a carousel to handle images more than the container cap & moved to a separate component -->
         <div class="h-[460px] flex flex-col justify-between overflow-scroll" >
           <img
             *ngFor="let image of product?.images"
             [ngSrc]="image"
-            [alt]="product?.title"
+            [alt]="product.title"
             width="104"
             height="141"
             priority
@@ -19,7 +20,7 @@
         <div class="ml-4" >
           <img
             [ngSrc]="selectedPreviewImage"
-            [alt]="product?.title"
+            [alt]="product.title"
             width="452"
             height="460"
             priority
@@ -27,8 +28,35 @@
           />
         </div>
       </div>
-      <div></div>
-      <div></div>
+      <div class="flex flex-col justify-between">
+        <div>
+          <div class="mb-4">
+            <h2 class="text-gray-700 text-2xl font-medium mb-4">{{ product.title }}</h2>
+            <p class="text-gray-400 text-xs font-medium">Model Number : CFI-1208A / CFI-1216A 01Y/CFI-1200A / CFI-1218A /
+              CFI-1016A / CFI-1116A</p>
+          </div>
+
+          <app-rates-badge [productRating]="product.rating"></app-rates-badge>
+
+          <div class="mt-4">
+            <span class="text-gray-400 font-medium text-sm mr-1">EGP</span>
+            <span class="text-xl text-gray-800 font-bold">{{ product.price | number: '1.0-0' }}</span>
+          </div>
+        </div>
+
+        <div class="flex justify-between" >
+          <div class="w-1/5 h-14" >
+            <app-dropdown
+              [options]="quantityOptions"
+              (setSelectedOption)="getQuantity($event)"
+            ></app-dropdown>
+          </div>
+          <button
+            class="w-3/4 h-14 bg-primary-700 p-4 rounded text-white text-base font-medium"
+            (click)="addToCart()"
+          > Add To Cart </button>
+        </div>
+      </div>
     </div>
   </div>
 </main>
